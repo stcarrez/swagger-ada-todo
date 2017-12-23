@@ -1,0 +1,270 @@
+swagger: '2.0'
+info:
+  title: Todo API
+  description: Todo API
+  version: 1.0.0
+  termsOfService: 'https://todo.vacs.fr/terms/'
+  contact:
+    email: Stephane.Carrez@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: todo.vacs.fr
+basePath: /v1
+tags:
+  - name: tasks
+    description: Tasks
+  - name: users
+    description: users
+schemes:
+  - https
+paths:
+  /users:
+    post:
+      tags:
+        - users
+      summary: Create a new user
+      description: Create a new user
+      operationId: createUser
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: formData
+          description: The username
+          required: true
+          type: string
+        - name: password
+          in: formData
+          description: The user password
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+        '405':
+          description: Invalid input
+  /todos:
+    get:
+      tags:
+        - tasks
+      summary: List the available tasks
+      description: |
+        List the available tasks
+      operationId: listTodos
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          description: Filters the task by their status
+          required: false
+          type: string
+          enum:
+            - done
+            - waiting
+            - all
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Todo'
+        '400':
+          description: Invalid status value
+      security:
+        - todo_auth:
+            - 'read:todo'
+    post:
+      tags:
+        - tasks
+      summary: Create a todo
+      description: ''
+      operationId: createTodo
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: title
+          in: formData
+          description: The todo title
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Todo'
+        '405':
+          description: Invalid input
+      security:
+        - todo_auth:
+            - 'write:todo'
+  '/todos/{todoId}':
+    put:
+      tags:
+        - tasks
+      summary: Update the todo
+      description: |
+        Update the todo title and status
+      operationId: updateTodo
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: todoId
+          in: path
+          description: The todo identifier
+          required: true
+          type: integer
+          format: int64
+        - name: title
+          in: query
+          required: true
+          description: The todo title
+          type: string
+        - name: status
+          in: query
+          required: true
+          description: The todo status
+          type: string
+          enum:
+            - waiting
+            - done
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Todo'
+        '404':
+          description: |
+            The todo does not exist.
+      security:
+        - todo_auth:
+            - 'write:todo'
+    delete:
+      tags:
+        - tasks
+      summary: Delete the todo
+      description: >
+        Delete the todo
+      operationId: deleteTodo
+      parameters:
+        - name: todoId
+          in: path
+          description: The todo identifier
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: |
+            No content.
+        '404':
+          description: |
+            The todo does not exist.
+      security:
+        - todo_auth:
+            - 'write:todo'
+securityDefinitions:
+  todo_auth:
+    type: oauth2
+    flow: password
+    tokenUrl: /oauth/authorize
+    scopes:
+      'write:todo': Write a todo
+      'read:todo': Read a todo
+      'create:user': Create a user
+definitions:
+  Todo:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The todo identifier
+      title:
+        type: string
+        description: The todo title
+      create_date:
+        type: string
+        format: date-time
+        description: The todo creation date
+      done_date:
+        type: string
+        nullable: true
+        format: date-time
+        description: The todo resolution date
+      status:
+        type: string
+        description: The todo state
+        enum:
+          - waiting
+          - done
+    required:
+      - id
+      - title
+      - status
+      - create_date
+    example:
+      id: 6
+      create_date: '2000-01-23T04:56:07.000+00:00'
+      title: Make a new release
+      status: waiting
+    xml:
+      name: Todo
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+        description: The user name
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    required:
+      - id
+      - username
+      - firstName
+      - lastName
+      - email
+      - password
+      - phone
+      - userStatus
+    title: a User
+    description: A User who manages todos
+    example:
+      firstName: firstName
+      lastName: lastName
+      password: password
+      userStatus: 6
+      phone: phone
+      id: 0
+      email: email
+      username: username
+    xml:
+      name: User
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

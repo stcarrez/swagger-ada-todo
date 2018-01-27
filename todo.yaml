@@ -14,60 +14,30 @@ basePath: /v1
 tags:
   - name: tasks
     description: Tasks
-  - name: users
-    description: users
 schemes:
   - https
+consumes:
+  - application/x-www-form-urlencoded
+produces:
+  - application/json
 paths:
-  /users:
-    post:
-      tags:
-        - users
-      summary: Create a new user
-      description: Create a new user
-      operationId: createUser
-      consumes:
-        - application/x-www-form-urlencoded
-      produces:
-        - application/json
-      parameters:
-        - name: username
-          in: formData
-          description: The username
-          required: true
-          type: string
-        - name: password
-          in: formData
-          description: The user password
-          required: true
-          type: string
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/User'
-        '405':
-          description: Invalid input
   /todos:
     get:
       tags:
         - tasks
       summary: List the available tasks
       description: |
-        List the available tasks
+        The list of tasks can be filtered by their status.
       operationId: listTodos
       produces:
         - application/json
       parameters:
         - name: status
           in: query
-          description: Filters the task by their status
+          description: Filters the tasks by their status
           required: false
           type: string
-          enum:
-            - done
-            - waiting
-            - all
+          enum: [done waiting working all]
       responses:
         '200':
           description: successful operation
@@ -136,6 +106,7 @@ paths:
           description: The todo status
           type: string
           enum:
+            - working
             - waiting
             - done
       responses:
@@ -153,7 +124,7 @@ paths:
       tags:
         - tasks
       summary: Delete the todo
-      description: >
+      description: |
         Delete the todo
       operationId: deleteTodo
       parameters:
@@ -173,6 +144,8 @@ paths:
       security:
         - todo_auth:
             - 'write:todo'
+security:
+  - todo_auth: []
 securityDefinitions:
   todo_auth:
     type: oauth2
@@ -181,7 +154,6 @@ securityDefinitions:
     scopes:
       'write:todo': Write a todo
       'read:todo': Read a todo
-      'create:user': Create a user
 definitions:
   Todo:
     type: object
@@ -199,7 +171,6 @@ definitions:
         description: The todo creation date
       done_date:
         type: string
-        nullable: true
         format: date-time
         description: The todo resolution date
       status:
@@ -207,6 +178,7 @@ definitions:
         description: The todo state
         enum:
           - waiting
+          - working
           - done
     required:
       - id
@@ -214,57 +186,13 @@ definitions:
       - status
       - create_date
     example:
-      id: 6
-      create_date: '2000-01-23T04:56:07.000+00:00'
-      title: Make a new release
-      status: waiting
+      id: 23
+      title: Make the FOSDEM presentation
+      description: password
+      status: working
+      create_date: 2017-12-24
     xml:
       name: Todo
-  User:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      username:
-        type: string
-        description: The user name
-      firstName:
-        type: string
-      lastName:
-        type: string
-      email:
-        type: string
-      password:
-        type: string
-      phone:
-        type: string
-      userStatus:
-        type: integer
-        format: int32
-        description: User Status
-    required:
-      - id
-      - username
-      - firstName
-      - lastName
-      - email
-      - password
-      - phone
-      - userStatus
-    title: a User
-    description: A User who manages todos
-    example:
-      firstName: firstName
-      lastName: lastName
-      password: password
-      userStatus: 6
-      phone: phone
-      id: 0
-      email: email
-      username: username
-    xml:
-      name: User
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'

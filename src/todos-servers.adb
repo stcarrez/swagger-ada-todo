@@ -84,17 +84,4 @@ package body Todos.Servers is
       end if;
    end Update_Todo;
 
-   --  Create a new user
-   --  Create a new user
-   overriding
-   procedure Create_User
-      (Server : in out Server_Type;
-       Username : in Swagger.UString;
-       Password : in Swagger.UString;
-       Result  : out Todos.Models.User_Type;
-       Context : in out Swagger.Servers.Context_Type) is
-   begin
-      null;
-   end Create_User;
-
 end Todos.Servers;

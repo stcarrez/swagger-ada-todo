@@ -63,16 +63,6 @@ package Todos.Servers is
        Result  : out Todos.Models.Todo_Type;
        Context : in out Swagger.Servers.Context_Type);
 
-   --  Create a new user
-   --  Create a new user
-   overriding
-   procedure Create_User
-      (Server : in out Server_Type;
-       Username : in Swagger.UString;
-       Password : in Swagger.UString;
-       Result  : out Todos.Models.User_Type;
-       Context : in out Swagger.Servers.Context_Type);
-
    package Server_Impl is
       new Todos.Skeletons.Shared_Instance (Server_Type);
 

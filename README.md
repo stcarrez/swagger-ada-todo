@@ -77,12 +77,10 @@ Method | HTTP request | Description
 [**Delete_Todo**](TasksApi.md#Delete_Todo) | **DELETE** /todos/{todoId} | Delete the todo
 [**List_Todos**](TasksApi.md#List_Todos) | **GET** /todos | List the available tasks
 [**Update_Todo**](TasksApi.md#Update_Todo) | **PUT** /todos/{todoId} | Update the todo
-[**Create_User**](UsersApi.md#Create_User) | **POST** /users | Create a new user
 
 
 ## Models
  - [Todos.Models.Todo_Type](Todo_Type.md)
- - [Todos.Models.User_Type](User_Type.md)
 
 
 ## Authorization
@@ -95,5 +93,4 @@ Method | HTTP request | Description
 - **Scopes**: 
   - **write:todo**: Write a todo
   - **read:todo**: Read a todo
-  - **create:user**: Create a user
 

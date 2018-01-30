@@ -21,6 +21,7 @@ package body Todos.Servers is
        Title : in Swagger.UString;
        Result  : out Todos.Models.Todo_Type;
        Context : in out Swagger.Servers.Context_Type) is
+      pragma Unreferenced (Context);
    begin
       Result.Id := Server.Next_Id;
       Result.Create_Date := Ada.Calendar.Clock;
@@ -43,7 +44,7 @@ package body Todos.Servers is
          Context.Set_Error (404, "Todo does not exist");
       else
          Server.Tasks.Delete (Pos);
-         Context.Set_Status (204, "No content");
+         Context.Set_Status (204);
       end if;
    end Delete_Todo;
 
@@ -55,6 +56,7 @@ package body Todos.Servers is
        Status : in Swagger.Nullable_UString;
        Result  : out Todos.Models.Todo_Type_Vectors.Vector;
        Context : in out Swagger.Servers.Context_Type) is
+      pragma Unreferenced (Context);
    begin
       for T of Server.Tasks loop
          if Status.Is_Null or else T.Status = Status.Value then
@@ -69,8 +71,8 @@ package body Todos.Servers is
    procedure Update_Todo
       (Server : in out Server_Type;
        Todo_Id : in Swagger.Long;
-       Title : in Swagger.UString;
-       Status : in Swagger.UString;
+       Title : in Swagger.Nullable_UString;
+       Status : in Swagger.Nullable_UString;
        Result  : out Todos.Models.Todo_Type;
        Context : in out Swagger.Servers.Context_Type) is
       Pos : constant Todo_Maps.Cursor := Server.Tasks.Find (Todo_Id);
@@ -79,8 +81,15 @@ package body Todos.Servers is
          Context.Set_Error (404, "Todo does not exist");
       else
          Result := Todo_Maps.Element (Pos);
-         Result.Title := Title;
-         Result.Status := Status;
+         if not Title.Is_Null then
+            Result.Title := Title.Value;
+         end if;
+         if not Status.Is_Null then
+            Result.Status := Status.Value;
+            if Status.Value = "done" then
+               Result.Done_Date := (Is_Null => False, Value => Ada.Calendar.Clock);
+            end if;
+         end if;
          Server.Tasks.Include (Result.Id, Result);
       end if;
    end Update_Todo;

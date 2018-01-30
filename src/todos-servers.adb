@@ -43,6 +43,7 @@ package body Todos.Servers is
          Context.Set_Error (404, "Todo does not exist");
       else
          Server.Tasks.Delete (Pos);
+         Context.Set_Status (204, "No content");
       end if;
    end Delete_Todo;
 

@@ -22,6 +22,7 @@
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
 todos.gpr
+todos.properties
 src/todos-servers.ads
 src/todos-servers.adb
-
+src/todos-client.adb

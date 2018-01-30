@@ -117,8 +117,8 @@ package body Todos.Skeletons is
           Context : in out Swagger.Servers.Context_Type) is
          Impl : Implementation_Type;
          Todo_Id : Swagger.Long;
-         Title : Swagger.UString;
-         Status : Swagger.UString;
+         Title : Swagger.Nullable_UString;
+         Status : Swagger.Nullable_UString;
          Result : Todos.Models.Todo_Type;
       begin
          if not Context.Is_Authenticated then
@@ -129,9 +129,9 @@ package body Todos.Skeletons is
             Context.Set_Error (403, "Permission denied");
             return;
          end if;
-         Swagger.Servers.Get_Query_Parameter (Req, "title", Title);
-         Swagger.Servers.Get_Query_Parameter (Req, "status", Status);
          Swagger.Servers.Get_Path_Parameter (Req, 1, Todo_Id);
+         Swagger.Servers.Get_Parameter (Context, "title", Title);
+         Swagger.Servers.Get_Parameter (Context, "status", Status);
          Impl.Update_Todo
             (Todo_Id,
              Title,
@@ -248,8 +248,8 @@ package body Todos.Skeletons is
           Stream  : in out Swagger.Servers.Output_Stream'Class;
           Context : in out Swagger.Servers.Context_Type) is
          Todo_Id : Swagger.Long;
-         Title : Swagger.UString;
-         Status : Swagger.UString;
+         Title : Swagger.Nullable_UString;
+         Status : Swagger.Nullable_UString;
          Result : Todos.Models.Todo_Type;
       begin
          if not Context.Is_Authenticated then
@@ -260,9 +260,9 @@ package body Todos.Skeletons is
             Context.Set_Error (403, "Permission denied");
             return;
          end if;
-         Swagger.Servers.Get_Query_Parameter (Req, "title", Title);
-         Swagger.Servers.Get_Query_Parameter (Req, "status", Status);
          Swagger.Servers.Get_Path_Parameter (Req, 1, Todo_Id);
+         Swagger.Servers.Get_Parameter (Context, "title", Title);
+         Swagger.Servers.Get_Parameter (Context, "status", Status);
          Server.Update_Todo
             (Todo_Id,
              Title,
@@ -323,8 +323,8 @@ package body Todos.Skeletons is
          --  Update the todo
          procedure Update_Todo
             (Todo_Id : in Swagger.Long;
-             Title : in Swagger.UString;
-             Status : in Swagger.UString;
+             Title : in Swagger.Nullable_UString;
+             Status : in Swagger.Nullable_UString;
              Result : out Todos.Models.Todo_Type;
              Context : in out Swagger.Servers.Context_Type) is
          begin

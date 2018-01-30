@@ -64,19 +64,21 @@ package body Todos.Clients is
    procedure Update_Todo
       (Client : in out Client_Type;
        Todo_Id : in Swagger.Long;
-       Title : in Swagger.UString;
-       Status : in Swagger.UString;
+       Title : in Swagger.Nullable_UString;
+       Status : in Swagger.Nullable_UString;
        Result : out Todos.Models.Todo_Type) is
       URI   : Swagger.Clients.URI_Type;
+      Req   : Swagger.Clients.Request_Type;
       Reply : Swagger.Value_Type;
    begin
       Client.Set_Accept ((1 => Swagger.Clients.APPLICATION_JSON));
+      Client.Initialize (Req, (1 => Swagger.Clients.APPLICATION_FORM));
+      Req.Stream.Write_Entity ("title", Title);
+      Req.Stream.Write_Entity ("status", Status);
 
-      URI.Add_Param ("title", Title);
-      URI.Add_Param ("status", Status);
       URI.Set_Path ("/todos/{todoId}");
       URI.Set_Path_Param ("todoId", Swagger.To_String (Todo_Id));
-      Client.Call (Swagger.Clients.PUT, URI, Reply);
+      Client.Call (Swagger.Clients.PUT, URI, Req, Reply);
       Todos.Models.Deserialize (Reply, "", Result);
    end Update_Todo;
 end Todos.Clients;

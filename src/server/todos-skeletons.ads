@@ -49,8 +49,8 @@ package Todos.Skeletons is
    procedure Update_Todo
       (Server : in out Server_Type;
        Todo_Id : in Swagger.Long;
-       Title : in Swagger.UString;
-       Status : in Swagger.UString;
+       Title : in Swagger.Nullable_UString;
+       Status : in Swagger.Nullable_UString;
        Result  : out Todos.Models.Todo_Type;
        Context : in out Swagger.Servers.Context_Type) is abstract;
 
@@ -156,8 +156,8 @@ package Todos.Skeletons is
          --  Update the todo
          procedure Update_Todo
             (Todo_Id : in Swagger.Long;
-             Title : in Swagger.UString;
-             Status : in Swagger.UString;
+             Title : in Swagger.Nullable_UString;
+             Status : in Swagger.Nullable_UString;
              Result  : out Todos.Models.Todo_Type;
              Context : in out Swagger.Servers.Context_Type);
 

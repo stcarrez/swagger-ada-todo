@@ -37,8 +37,8 @@ package Todos.Clients is
    procedure Update_Todo
       (Client : in out Client_Type;
        Todo_Id : in Swagger.Long;
-       Title : in Swagger.UString;
-       Status : in Swagger.UString;
+       Title : in Swagger.Nullable_UString;
+       Status : in Swagger.Nullable_UString;
        Result : out Todos.Models.Todo_Type);
 
 end Todos.Clients;

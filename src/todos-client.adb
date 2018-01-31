@@ -30,11 +30,12 @@ procedure Todos.Client is
       Util.Log.Loggers.Initialize (Config);
       declare
          Server : constant String := Config.Get ("server_url");
+         Scope  : constant String := Config.Get ("scope", "read:todo,write:todo");
       begin
          Cred.Set_Application_Identifier (Config.Get ("client_id"));
          Cred.Set_Application_Secret (Config.Get ("client_secret"));
          Cred.Set_Provider_URI (Server & "/oauth/token");
-         Cred.Request_Token (Config.Get ("username"), Config.Get ("password"), "");
+         Cred.Request_Token (Config.Get ("username"), Config.Get ("password"), Scope);
          Client.Set_Server (Server);
       end;
 

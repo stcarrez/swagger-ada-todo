@@ -38,7 +38,11 @@ paths:
           description: Filters the tasks by their status
           required: false
           type: string
-          enum: [done waiting working all]
+          enum:
+            - done
+            - waiting
+            - working
+            - all
       responses:
         '200':
           description: successful operation
@@ -151,7 +155,7 @@ securityDefinitions:
   todo_auth:
     type: oauth2
     flow: password
-    tokenUrl: /v1/oauth/token
+    tokenUrl: http://localhost:8080/v1/oauth/token
     scopes:
       'write:todo': Write a todo
       'read:todo': Read a todo
@@ -191,7 +195,7 @@ definitions:
       title: Make the FOSDEM presentation
       description: password
       status: working
-      create_date: 2017-12-24
+      create_date: 2017-12-24T00:00:00.000Z
     xml:
       name: Todo
 externalDocs:

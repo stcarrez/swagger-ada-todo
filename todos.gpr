@@ -11,13 +11,13 @@
 --  with "asf";
 --  with "security";
 --  with "swagger";
-with "../ada-awa/ada-util/config";
-with "../ada-awa/ada-util/util";
-with "../ada-awa/ada-util/util_http";
-with "../ada-awa/ada-servlet/servlet";
-with "../ada-awa/ada-security/security";
-with "../swagger-ada/swagger";
-with "../swagger-ada/swagger_server";
+with "config";
+with "util";
+with "util_http";
+with "servlet";
+with "security";
+with "swagger";
+with "swagger_server";
 project todos is
 
     Mains := ("todos-server.adb", "todos-client.adb");

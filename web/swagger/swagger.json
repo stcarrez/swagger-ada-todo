@@ -13,7 +13,7 @@
       "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host" : "localhost:8080",
+  "host" : "SWAGGER_HOST",
   "basePath" : "/v1",
   "tags" : [ {
     "name" : "tasks",
@@ -394,13 +394,13 @@
           "type" : "string",
           "format" : "date-time",
           "description" : "The todo creation date",
-          "x-is-model-type" : true
+          "x-is-model-type" : false
         },
         "done_date" : {
           "type" : "string",
           "format" : "date-time",
           "description" : "The todo resolution date",
-          "x-is-model-type" : true
+          "x-is-model-type" : false
         },
         "status" : {
           "type" : "string",

@@ -21,6 +21,7 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+README.md
 todos.gpr
 todos.properties
 src/todos-servers.ads

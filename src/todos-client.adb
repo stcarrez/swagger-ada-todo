@@ -129,6 +129,9 @@ begin
       when Swagger.Clients.Not_Found =>
          Put_Line ("The todo does not exist.");
 
+      when Swagger.Clients.Authorization_Error =>
+         Put_Line ("Authorization failed");
+
       when E : Constraint_Error =>
          Put_Line ("Constraint error raised: " & Ada.Exceptions.Exception_Message (E));
 

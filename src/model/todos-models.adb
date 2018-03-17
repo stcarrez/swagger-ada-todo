@@ -46,8 +46,8 @@ package body Todos.Models is
       Swagger.Streams.Deserialize (From, Name, Object);
       Swagger.Streams.Deserialize (Object, "id", Value.Id);
       Swagger.Streams.Deserialize (Object, "title", Value.Title);
-      Deserialize (Object, "create_date", Value.Create_Date);
-      Deserialize (Object, "done_date", Value.Done_Date);
+      Swagger.Streams.Deserialize (Object, "create_date", Value.Create_Date);
+      Swagger.Streams.Deserialize (Object, "done_date", Value.Done_Date);
       Swagger.Streams.Deserialize (Object, "status", Value.Status);
    end Deserialize;
 

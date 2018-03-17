@@ -40,9 +40,11 @@ package body Todos.Skeletons is
          Swagger.Servers.Get_Parameter (Context, "title", Title);
          Impl.Create_Todo
             (Title, Result, Context);
-         Stream.Start_Document;
-         Todos.Models.Serialize (Stream, "", Result);
-         Stream.End_Document;
+         if Context.Get_Status = 200 then
+            Stream.Start_Document;
+            Todos.Models.Serialize (Stream, "", Result);
+            Stream.End_Document;
+         end if;
       end Create_Todo;
 
       package API_Delete_Todo is
@@ -99,9 +101,11 @@ package body Todos.Skeletons is
          Swagger.Servers.Get_Query_Parameter (Req, "status", Status);
          Impl.List_Todos
             (Status, Result, Context);
-         Stream.Start_Document;
-         Todos.Models.Serialize (Stream, "", Result);
-         Stream.End_Document;
+         if Context.Get_Status = 200 then
+            Stream.Start_Document;
+            Todos.Models.Serialize (Stream, "", Result);
+            Stream.End_Document;
+         end if;
       end List_Todos;
 
       package API_Update_Todo is
@@ -136,9 +140,11 @@ package body Todos.Skeletons is
             (Todo_Id,
              Title,
              Status, Result, Context);
-         Stream.Start_Document;
-         Todos.Models.Serialize (Stream, "", Result);
-         Stream.End_Document;
+         if Context.Get_Status = 200 then
+            Stream.Start_Document;
+            Todos.Models.Serialize (Stream, "", Result);
+            Stream.End_Document;
+         end if;
       end Update_Todo;
 
       procedure Register (Server : in out Swagger.Servers.Application_Type'Class) is
@@ -174,9 +180,11 @@ package body Todos.Skeletons is
          Swagger.Servers.Get_Parameter (Context, "title", Title);
          Server.Create_Todo
             (Title, Result, Context);
-         Stream.Start_Document;
-         Todos.Models.Serialize (Stream, "", Result);
-         Stream.End_Document;
+         if Context.Get_Status = 200 then
+            Stream.Start_Document;
+            Todos.Models.Serialize (Stream, "", Result);
+            Stream.End_Document;
+         end if;
       end Create_Todo;
 
       package API_Create_Todo is
@@ -231,9 +239,11 @@ package body Todos.Skeletons is
          Swagger.Servers.Get_Query_Parameter (Req, "status", Status);
          Server.List_Todos
             (Status, Result, Context);
-         Stream.Start_Document;
-         Todos.Models.Serialize (Stream, "", Result);
-         Stream.End_Document;
+         if Context.Get_Status = 200 then
+            Stream.Start_Document;
+            Todos.Models.Serialize (Stream, "", Result);
+            Stream.End_Document;
+         end if;
       end List_Todos;
 
       package API_List_Todos is
@@ -267,9 +277,11 @@ package body Todos.Skeletons is
             (Todo_Id,
              Title,
              Status, Result, Context);
-         Stream.Start_Document;
-         Todos.Models.Serialize (Stream, "", Result);
-         Stream.End_Document;
+         if Context.Get_Status = 200 then
+            Stream.Start_Document;
+            Todos.Models.Serialize (Stream, "", Result);
+            Stream.End_Document;
+         end if;
       end Update_Todo;
 
       package API_Update_Todo is

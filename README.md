@@ -69,7 +69,7 @@ the **null** instruction by real code.
 
 ## API Documentation
 
-All URIs are relative to *https://localhost:8080/v1*
+All URIs are relative to *https://todo.vacs.fr/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

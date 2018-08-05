@@ -113,8 +113,8 @@ begin
                         Result  => Todo);
          Print (Todo);
 
-      elsif Arg_Count = 2 and Command = "update" then
-         Title := Swagger.To_UString (Ada.Command_Line.Argument (2));
+      elsif Arg_Count = 3 and Command = "update" then
+         Title := Swagger.To_UString (Ada.Command_Line.Argument (3));
          C.Update_Todo (Todo_Id => Swagger.Long'Value (Ada.Command_Line.Argument (2)),
                         Title   => (Is_Null => False, Value => Title),
                         Status  => (Is_Null => True, Value => <>),

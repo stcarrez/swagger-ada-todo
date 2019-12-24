@@ -4,5 +4,5 @@ build:
 	gprbuild -p -Ptodos
 
 generate:
-	$(SWAGGER) generate --generator-name ada -i todo.yaml -DprojectName=todos --model-package Todos
-	$(SWAGGER) generate --generator-name ada-server -i todo.yaml -DprojectName=todos --model-package Todos
+	$(SWAGGER) generate --generator-name ada -i todo.yaml --additional-properties projectName=todos --model-package Todos -o .
+	$(SWAGGER) generate --generator-name ada-server -i todo.yaml --additional-properties projectName=todos --model-package Todos -o .

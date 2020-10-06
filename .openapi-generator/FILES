@@ -1,0 +1,8 @@
+config.gpr
+src/model/todos-models.adb
+src/model/todos-models.ads
+src/server/todos-skeletons.adb
+src/server/todos-skeletons.ads
+src/todos-server.adb
+src/todos.ads
+web/swagger/openapi.json

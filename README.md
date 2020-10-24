@@ -9,9 +9,9 @@ you can easily generate a server stub.
 ## Building
 
 To build the server you will need the GNAT Ada compiler as well as
-the [Swagger Ada library](https://github.com/stcarrez/swagger-ada).
+the [OpenAPI Ada library](https://github.com/stcarrez/swagger-ada).
 
-When the GNAT Ada compiler and Swagger Ada libraries are installed,
+When the GNAT Ada compiler and OpenAPI Ada libraries are installed,
 run the following command:
 
 ```
@@ -19,10 +19,49 @@ run the following command:
 ```
 
 After the build is successfull, you will get the server binary
-in bin/todos-server and you can start it as follows:
+in `bin/todos-server` and you can start it as follows:
 ```
-  ./bin/todos-server
+./bin/todos-server
 ```
+
+The client example is also available in `bin/todos-client` and you
+can use it to populate the server with todos, update them, list them.
+
+You can add a todos with the following command:
+
+```
+./bin/todos-client add 'Explain how to use this example'
+./bin/todos-client add 'Integrate OpenAPI generator 5.0.0'
+./bin/todos-client add 'Update the Swagger UI'
+```
+
+You can list the todos with the following command:
+
+```
+./bin/todos-client list
+ 1   waiting  2020-10-24 07:51:55      -                   Explain how to use this example
+ 2   waiting  2020-10-24 07:52:29      -                   Integrate OpenAPI generator 5.0.0
+ 3   waiting  2020-10-24 07:53:30      -                   Update the Swagger UI   
+```
+You can delete a todo by using the `del` command and giving the todo identifier:
+
+```
+./bin/todos-client del 3
+```
+
+You can close a todo by using the `close` command:
+
+```
+./bin/todos-client close 2
+```
+
+And the `list` command will show you that the todo is done:
+
+```
+./bin/todos-client list
+ 1   waiting  2020-10-24 07:51:55      -                   Explain how to use this example
+ 2   done     2020-10-24 07:52:29      2020-10-24 07:53:53 Integrate OpenAPI generator 5.0.0
+```  
 
 ## Structure of the server
 

@@ -14,13 +14,15 @@ the [OpenAPI Ada library](https://github.com/stcarrez/swagger-ada).
 When the GNAT Ada compiler and OpenAPI Ada libraries are installed,
 run the following command:
 
-```shell
+```sh
 gprbuild -p -Ptodos
 ```
 
+## Running
+
 After the build is successfull, you will get the server binary
 in `bin/todos-server` and you can start it as follows:
-```shell
+```sh
 ./bin/todos-server
 ```
 

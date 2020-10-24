@@ -65,6 +65,24 @@ And the `list` command will show you that the todo is done:
  2   done     2020-10-24 07:52:29      2020-10-24 07:53:53 Integrate OpenAPI generator 5.0.0
 ```  
 
+## Swagger UI
+
+The server is running on `localhost:8080` and it can display the Swagger UI
+with the list of operations supported by the server.  For this, point your
+browser to: http://localhost:8080/v1/ui/index.html
+
+If the server replies with a `404` error, the Swagger UI is not found in the
+installation path, update the `todos.properties` file and change the `swagger.dir`
+value:
+
+```
+swagger.dir=web;/usr/share/swagger-ada/web/
+```
+
+you may have to change `/usr` by the installation path (prefix) you have
+used for the [OpenAPI Ada library](https://github.com/stcarrez/swagger-ada).
+Then, restart the server.
+
 ## Structure of the server
 
 The server consists of several Ada packages that are generated from

@@ -14,6 +14,15 @@ package body Todos.Servers is
 
    use type Swagger.UString;
 
+   overriding
+   procedure Redirect_Todos
+     (Server : in out Server_Type;
+      Context : in out Swagger.Servers.Context_Type) is
+   begin
+      Context.Set_Status (301);
+      Context.Set_Location ("/v1/ui/index.html");
+   end Redirect_Todos;
+
    --  Create a todo
    overriding
    procedure Create_Todo

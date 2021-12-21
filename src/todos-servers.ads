@@ -27,6 +27,11 @@ package Todos.Servers is
       Next_Id : Swagger.Long := 1;
    end record;
 
+   overriding
+   procedure Redirect_Todos
+      (Server : in out Server_Type;
+       Context : in out Swagger.Servers.Context_Type);
+
    --  Create a todo
    overriding
    procedure Create_Todo

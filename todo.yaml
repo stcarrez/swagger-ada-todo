@@ -16,6 +16,17 @@ tags:
   - name: tasks
     description: Tasks
 paths:
+  /:
+    get:
+      tags:
+        - tasks
+      summary: Redirect to the UI
+      description: |
+        Default operation to redirect to the UI index page.
+      operationId: redirectTodos
+      responses:
+        '302':
+          description: redirect to the UI page
   /todos:
     get:
       tags:

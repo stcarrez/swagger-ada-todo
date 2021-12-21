@@ -30,6 +30,19 @@
     "name" : "tasks"
   } ],
   "paths" : {
+    "/" : {
+      "get" : {
+        "description" : "Default operation to redirect to the UI index page.\n",
+        "operationId" : "redirectTodos",
+        "responses" : {
+          "302" : {
+            "description" : "redirect to the UI page"
+          }
+        },
+        "summary" : "Redirect to the UI",
+        "tags" : [ "tasks" ]
+      }
+    },
     "/todos" : {
       "get" : {
         "description" : "The list of tasks can be filtered by their status.\n",

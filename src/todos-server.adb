@@ -1,7 +1,7 @@
 with Ada.IO_Exceptions;
 with AWS.Config.Set;
-with Swagger.Servers.AWS;
-with Swagger.Servers.Applications;
+with OpenAPI.Servers.AWS;
+with OpenAPI.Servers.Applications;
 with Util.Strings;
 with Util.Log.Loggers;
 with Util.Properties;
@@ -22,8 +22,8 @@ procedure Todos.Server is
       AWS.Config.Set.Accept_Queue_Size (Config, 512);
    end Configure;
 
-   App     : aliased Swagger.Servers.Applications.Application_Type;
-   WS      : Swagger.Servers.AWS.AWS_Container;
+   App     : aliased OpenAPI.Servers.Applications.Application_Type;
+   WS      : OpenAPI.Servers.AWS.AWS_Container;
    Log     : constant Util.Log.Loggers.Logger := Util.Log.Loggers.Create ("Todos.Server");
    Props   : Util.Properties.Manager;
 begin

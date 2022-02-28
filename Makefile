@@ -1,8 +1,12 @@
-SWAGGER=java -jar openapi-generator-cli.jar
+OPENAPI=openapi-generator
+OPENAPI_OPTIONS=--additional-properties projectName=todos \
+                --additional-properties openApiName=OpenAPI \
+                --additional-properties httpSupport=Curl \
+                --model-package Todos -o .
 
 build:
 	gprbuild -p -Ptodos
 
 generate:
-	$(SWAGGER) generate --generator-name ada -i todo.yaml --additional-properties projectName=todos --model-package Todos -o .
-	$(SWAGGER) generate --generator-name ada-server -i todo.yaml --additional-properties projectName=todos --model-package Todos -o .
+	$(OPENAPI) generate --generator-name ada -i todo.yaml $(OPENAPI_OPTIONS)
+	$(OPENAPI) generate --generator-name ada-server -i todo.yaml $(OPENAPI_OPTIONS)

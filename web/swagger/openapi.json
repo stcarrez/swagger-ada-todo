@@ -84,6 +84,7 @@
         "tags" : [ "tasks" ]
       },
       "post" : {
+        "description" : "",
         "operationId" : "createTodo",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/inline_object",

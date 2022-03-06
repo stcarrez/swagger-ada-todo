@@ -153,3 +153,43 @@ Method | HTTP request | Description
   - **write:todo**: Write a todo
   - **read:todo**: Read a todo
 
+# Docker
+
+A docker container is available for those who want to try OpenAPI todo without installing
+and building all required packages.  To use the OpenAPI todo docker container you can
+run the following commands:
+
+```
+   sudo docker pull ciceron/openapi-todo
+   sudo docker run --name openapi-todo -p 8080:8080 ciceron/openapi-todo
+```
+
+To acces the OpenAPI UI, you can point your browser to http://localhost:8080/v1/ui/index.html
+
+To run the client, you can start in another terminal the following command:
+
+```
+   sudo docker exec -it openapi-todo /bin/bash
+```
+
+This will start a shell in the container and you can run the following commands to
+send REST requests on the running server:
+
+```
+   ./bin/todos-client add 'Explain how to use this example'
+   ./bin/todos-client add 'Integrate OpenAPI generator 5.0.0'
+   ./bin/todos-client add 'Update the Swagger UI'
+   ./bin/todos-client list
+```
+
+To stop the running application you will use:
+```
+   sudo docker stop openapi-ada
+   sudo docker rm openapi-ada
+```
+
+If you want to build locally the docker image, you can use:
+
+```
+   sudo docker build -t openapi-ada -f docker/Dockerfile .
+```

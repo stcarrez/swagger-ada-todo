@@ -17,7 +17,7 @@ with "utilada_xml";
 with "utilada_http";
 with "servletada";
 with "security";
-with "swagger";
+with "openapi";
 with "swagger_server";
 project todos is
 

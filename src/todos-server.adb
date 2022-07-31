@@ -37,7 +37,7 @@ begin
    WS.Configure (Configure'Access);
    WS.Register_Application ("/v1", App'Unchecked_Access);
    App.Dump_Routes (Util.Log.INFO_LEVEL);
-   Log.Info ("Connect you browser to: http://localhost:{0}/v1/ui/index.html",
+   Log.Info ("Connect your browser to: http://localhost:{0}/v1/ui/index.html",
              Util.Strings.Image (Port));
 
    WS.Start;

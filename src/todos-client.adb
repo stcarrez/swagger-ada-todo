@@ -90,7 +90,7 @@ begin
    begin
       Configure ("client.properties", C, Cred);
 
-      C.Set_Credentials (Cred'Access);
+      C.Set_Credentials (Cred'Unchecked_Access);
       if Arg_Count = 2 and Command = "add" then
          Title := Swagger.To_UString (Ada.Command_Line.Argument (2));
          C.Create_Todo (Title, Todo);

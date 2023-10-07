@@ -13,7 +13,7 @@ RUN mkdir -p /usr/src \
 
 ### 2. stage: create production image
 
-FROM ubuntu:focal AS openapi-todo
+FROM debian:bookworm AS openapi-todo
 
 ENV INSTALL_PREFIX /usr/openapi-todo
 ENV BUILD_PREFIX /usr/src/openapi-todo

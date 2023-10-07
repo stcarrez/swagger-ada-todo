@@ -1,4 +1,6 @@
 config.gpr
+src/aws/todos_aws.adb
+src/ews/todos_ews.adb
 src/model/todos-models.adb
 src/model/todos-models.ads
 src/server/todos-skeletons.adb

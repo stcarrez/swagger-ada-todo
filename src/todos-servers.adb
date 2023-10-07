@@ -1,9 +1,9 @@
 --  Todo API
 --  Todo API
 --  ------------ EDIT NOTE ------------
---  This file was generated with swagger-codegen.  You can modify it to implement
+--  This file was generated with openapi-generator.  You can modify it to implement
 --  the server.  After you modify this file, you should add the following line
---  to the .swagger-codegen-ignore file:
+--  to the .openapi-generator-ignore file:
 --
 --  src/todos-servers.adb
 --
@@ -12,12 +12,12 @@
 with Ada.Calendar;
 package body Todos.Servers is
 
-   use type Swagger.UString;
+   use type OpenAPI.UString;
 
    overriding
    procedure Redirect_Todos
      (Server : in out Server_Type;
-      Context : in out Swagger.Servers.Context_Type) is
+      Context : in out OpenAPI.Servers.Context_Type) is
    begin
       Context.Set_Status (301);
       Context.Set_Location ("/v1/ui/index.html");
@@ -27,14 +27,14 @@ package body Todos.Servers is
    overriding
    procedure Create_Todo
       (Server : in out Server_Type;
-       Title : in Swagger.UString;
+       Title : in OpenAPI.UString;
        Result  : out Todos.Models.Todo_Type;
-       Context : in out Swagger.Servers.Context_Type) is
+       Context : in out OpenAPI.Servers.Context_Type) is
       pragma Unreferenced (Context);
    begin
       Result.Id := Server.Next_Id;
       Result.Create_Date := Ada.Calendar.Clock;
-      Result.Status := Swagger.To_UString ("waiting");
+      Result.Status := OpenAPI.To_UString ("waiting");
       Result.Title := Title;
       Server.Next_Id := Server.Next_Id + 1;
       Server.Tasks.Insert (Result.Id, Result);
@@ -45,8 +45,8 @@ package body Todos.Servers is
    overriding
    procedure Delete_Todo
       (Server : in out Server_Type;
-       Todo_Id : in Swagger.Long;
-       Context : in out Swagger.Servers.Context_Type) is
+       Todo_Id : in OpenAPI.Long;
+       Context : in out OpenAPI.Servers.Context_Type) is
       Pos : Todo_Maps.Cursor := Server.Tasks.Find (Todo_Id);
    begin
       if not Todo_Maps.Has_Element (Pos) then
@@ -62,9 +62,9 @@ package body Todos.Servers is
    overriding
    procedure List_Todos
       (Server : in out Server_Type;
-       Status : in Swagger.Nullable_UString;
+       Status : in OpenAPI.Nullable_UString;
        Result  : out Todos.Models.Todo_Type_Vectors.Vector;
-       Context : in out Swagger.Servers.Context_Type) is
+       Context : in out OpenAPI.Servers.Context_Type) is
       pragma Unreferenced (Context);
    begin
       for T of Server.Tasks loop
@@ -79,11 +79,11 @@ package body Todos.Servers is
    overriding
    procedure Update_Todo
       (Server : in out Server_Type;
-       Todo_Id : in Swagger.Long;
-       Title : in Swagger.Nullable_UString;
-       Status : in Swagger.Nullable_UString;
+       Todo_Id : in OpenAPI.Long;
+       Title : in OpenAPI.Nullable_UString;
+       Status : in OpenAPI.Nullable_UString;
        Result  : out Todos.Models.Todo_Type;
-       Context : in out Swagger.Servers.Context_Type) is
+       Context : in out OpenAPI.Servers.Context_Type) is
       Pos : constant Todo_Maps.Cursor := Server.Tasks.Find (Todo_Id);
    begin
       if not Todo_Maps.Has_Element (Pos) then

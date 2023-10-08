@@ -19,7 +19,7 @@ ENV INSTALL_PREFIX /usr/openapi-todo
 ENV BUILD_PREFIX /usr/src/openapi-todo
 
 RUN apt-get update && \
-    apt-get install -y libaws5
+    apt-get install -y libgnatcoll21 libgnatprj10 libssl3
 
 COPY --from=openapi-todo-build ${BUILD_PREFIX}/bin/ ${INSTALL_PREFIX}/bin/
 COPY --from=openapi-todo-build ${BUILD_PREFIX}/web/ ${INSTALL_PREFIX}/web/
@@ -31,4 +31,4 @@ COPY --from=openapi-todo-build /usr/share/openapi-ada /usr/share/openapi-ada
 EXPOSE 8080
 
 WORKDIR ${INSTALL_PREFIX}
-CMD ${INSTALL_PREFIX}/bin/todos-server
+CMD ${INSTALL_PREFIX}/bin/todos_aws

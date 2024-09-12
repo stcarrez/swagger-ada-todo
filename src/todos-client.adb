@@ -3,7 +3,7 @@ with Todos.Models;
 with Swagger;
 with Util.Properties;
 with Util.Log.Loggers;
-with Util.Http.Clients.Aws;
+with Util.Http.Clients.AWS;
 with Ada.IO_Exceptions;
 with Ada.Text_IO;
 with Ada.Command_Line;
@@ -79,7 +79,7 @@ begin
       Usage;
       return;
    end if;
-   Util.Http.Clients.Aws.Register;
+   Util.Http.Clients.AWS.Register;
    declare
       Command  : constant String := Ada.Command_Line.Argument (1);
       Cred     : aliased Swagger.Credentials.OAuth.OAuth2_Credential_Type;

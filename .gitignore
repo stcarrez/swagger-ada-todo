@@ -1,4 +1,6 @@
 *~
-bin
 log
 *.log
+alire/
+obj/
+bin/
